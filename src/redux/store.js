@@ -1,8 +1,10 @@
 import { configureStore, createAsyncThunk } from '@reduxjs/toolkit';
-import flightReducer from './slices/flightSlice';
+import flightSlice from './slices/flightSlice';
 
 const store = configureStore({
-  reducer: flightReducer,
+  reducer: {
+    flight: flightSlice,
+  },
 });
 
 export default store;

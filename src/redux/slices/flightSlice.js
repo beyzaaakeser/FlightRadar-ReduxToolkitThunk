@@ -28,3 +28,4 @@ const flightSlice = createSlice({
 });
 
 export default flightSlice.reducer;
+
