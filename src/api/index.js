@@ -4,7 +4,7 @@ const api = axios.create({
   baseURL: 'https://flight-radar1.p.rapidapi.com',
 
   headers: {
-    'x-rapidapi-key': '812ad8fb28mshdc954639b2e2707p11a7f7jsne6f5092debcc',
+    'x-rapidapi-key': '93abac49f1mshf96bc7f455d8f52p1bfff8jsn714e0a7240e5',
     'x-rapidapi-host': 'flight-radar1.p.rapidapi.com',
   },
 });

@@ -164,6 +164,25 @@ header {
   background-color: rgb(205, 170, 0);
 }
 
+.modal-inner::-webkit-scrollbar {
+  width: 10px; /* Scrollbar genişliği */
+  border-radius: 10px;
+  
+}
+
+.modal-inner::-webkit-scrollbar-track {
+  background: #000000; /* Scrollbar arka planı */
+}
+
+.modal-inner::-webkit-scrollbar-thumb {
+  background: #9CA3AF; /* Scrollbar rengi */
+  border-radius: 10px;
+}
+
+.modal-inner::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Hover üzerinde scrollbar rengi */
+}
+
 /* LOADER*/
 /* From Uiverse.io by Valeron-T */
 .loader {
