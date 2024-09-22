@@ -11,7 +11,11 @@ const initialState = {
 const infoSlice = createSlice({
   name: 'info',
   initialState,
-  reducers: {},
+  reducers: {
+    clearRoute: (state) => {
+      state.route = null;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getInfo.pending, (state) => {
       state.isLoading = true;
@@ -29,5 +33,5 @@ const infoSlice = createSlice({
     });
   },
 });
-
+export const { clearRoute } = infoSlice.actions;
 export default infoSlice.reducer;

@@ -14,7 +14,7 @@ const Modal = ({ detailId, close }) => {
 
   console.log(info);
 
-  const isVIP = !info.aircraft.registration || !info.airline?.name;
+  const isVIP = !info?.aircraft?.registration || !info?.airline?.name;
 
   return (
     <div className="fixed z-[9999] h-lvh top-0 left-0 flex items-center modal-outer max-sm:w-[100%] max-sm:bg-red-500">
@@ -45,26 +45,26 @@ const Modal = ({ detailId, close }) => {
             <div className="h-[100%] flex flex-col justify-between pt-1 text-white">
               <div className="flex flex-col gap-2">
                 <h2 className="my-1 text-2xl font-bold">
-                  {info.aircraft.model.text}
+                  {info?.aircraft?.model?.text}
                 </h2>
                 <h2 className="my-1 text-lg font-semibold">
-                  {info.aircraft.model.code}
+                  {info?.aircraft?.model?.code}
                 </h2>
 
                 <p className="flex gap-3 mb-2">
                   <span>Queue Code</span>
                   <span className="bg-blue-400 px-2 py-1 rounded-md font-bold capitalize text-white text-sm ">
-                    {info.aircraft.registration}
+                    {info?.aircraft?.registration}
                   </span>
                 </p>
-                <img src={info.aircraft.images.large[0].src} alt="" />
+                <img src={info?.aircraft?.images?.large[0]?.src} alt="" />
                 <div className="bg-gray-400 p-4 text-black">
                   <p className="flex gap-3 py-2">
                     <span className="max-sm:w-1/3 sm:w-1/2 font-semibold">
                       Airline
                     </span>
                     <span className="max-sm:w-2/3 sm:w-1/2">
-                      {info.airline?.name}
+                      {info?.airline?.name}
                     </span>
                   </p>
                   <p className="flex gap-3 py-2">
@@ -72,11 +72,11 @@ const Modal = ({ detailId, close }) => {
                       Departure Airport
                     </span>
                     <a
-                      href={info.airport.origin.website}
+                      href={info?.airport?.origin?.website}
                       className="text-black max-sm:w-2/3 sm:w-1/2"
                       target="_blank"
                     >
-                      {info.airport.origin.name}
+                      {info?.airport?.origin?.name}
                     </a>
                   </p>
                   <p className="flex gap-3 py-2">
@@ -96,7 +96,7 @@ const Modal = ({ detailId, close }) => {
                       Departure Time
                     </span>
                     <span className="max-sm:w-2/3 sm:w-1/2">
-                      {formatDate(info.time.scheduled.departure)}
+                      {formatDate(info?.time?.scheduled?.departure)}
                     </span>
                   </p>
                   <p className="flex gap-3 py-2">
@@ -104,7 +104,7 @@ const Modal = ({ detailId, close }) => {
                       Arrival Time
                     </span>
                     <span className="max-sm:w-2/3 sm:w-1/2">
-                      {formatDate(info.time.scheduled.arrival)}
+                      {formatDate(info?.time?.scheduled?.arrival)}
                     </span>
                   </p>
                 </div>
@@ -113,7 +113,7 @@ const Modal = ({ detailId, close }) => {
               <p
                 className={`flex gap-3 p-2 mt-4 rounded-xl font-bold justify-center bg-gray-400 ${info.status.icon}`}
               >
-                <span>{info.status.text}</span>
+                <span>{info?.status?.text}</span>
               </p>
             </div>
           )

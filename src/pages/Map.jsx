@@ -1,12 +1,20 @@
 import React from 'react';
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+import {
+  MapContainer,
+  Marker,
+  Polyline,
+  Popup,
+  TileLayer,
+} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import DetailButton from '../components/DetailButton';
 import { icon } from 'leaflet';
-const Map = ({setDetailId}) => {
+import { clearRoute } from '../redux/slices/infoSlice';
+const Map = ({ setDetailId }) => {
   const { isLoading, error, flights } = useSelector((store) => store.flight);
-  const { route} = useSelector((store) => store.info);
+  const { route } = useSelector((store) => store.info);
+  const dispatch = useDispatch()
   const planeIcon = icon({
     iconUrl: '/public/plane.png',
     iconSize: new L.Point(25, 25),
@@ -31,11 +39,16 @@ const Map = ({setDetailId}) => {
           <Popup>
             <div className="popup">
               <span>Code: {flight.code}</span>
-              <DetailButton setDetailId={setDetailId} flight={flight}/>
+              <DetailButton setDetailId={setDetailId} flight={flight} />
+              <button onClick={()=> dispatch(clearRoute())} className="bg-gray-950 text-white rounded-md border-none text-[14px]">
+                Clear Route
+              </button>
             </div>
           </Popup>
         </Marker>
       ))}
+
+      {route && <Polyline positions={route} />}
     </MapContainer>
   );
 };
