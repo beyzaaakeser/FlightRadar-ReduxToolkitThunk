@@ -11,6 +11,7 @@ body {
   background: #242528;
   min-height: 100vh;
   font-family: 'Inter', system-ui;
+  user-select: none;
   a {
     text-decoration: none;
     color: #aaccff;
@@ -190,6 +191,28 @@ header {
 
 .list-error{
   margin-top: 90px;
+}
+
+.pagination{
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
+  li{
+    padding: 10px 15px;
+    background: black;
+    color: white;
+  }
+
+  li:first-child{
+    border-radius: 10px 0 0 10px;
+  }
+  li:last-child{
+    border-radius: 0 10px 10px 0 ;
+  }
+
+  .selected{
+    background: #EA6F07;
+  }
 }
 
 /* LOADER*/

@@ -1,11 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Loader from '../components/Loader';
 import Error from '../components/Error';
+import ReactPaginate from 'react-paginate';
+
 const List = ({ setDetailId }) => {
   const { isLoading, error, flights } = useSelector((store) => store.flight);
   console.log(flights);
+
+  const [start, setStart] = useState(0);
+
+  const perPage = 10;
+
+  const end = start + perPage;
+
+  const currFlights = flights.slice(start, end);
+
+  const total = Math.ceil(flights.length / perPage);
+
+  const handlePageClick = (e) => {
+    setStart(e.selected * perPage);
+  };
 
   if (isLoading) {
     return (
@@ -36,7 +52,7 @@ const List = ({ setDetailId }) => {
           </tr>
         </thead>
         <tbody>
-          {flights.map((flight) => (
+          {currFlights.map((flight) => (
             <tr>
               <td>{flight.id}</td>
               <td>{flight.code}</td>
@@ -54,6 +70,17 @@ const List = ({ setDetailId }) => {
           ))}
         </tbody>
       </table>
+
+      <ReactPaginate
+        className="pagination"
+        breakLabel="..."
+        nextLabel=">"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={total}
+        previousLabel="<"
+        renderOnZeroPageCount={null}
+      />
     </div>
   );
 };
