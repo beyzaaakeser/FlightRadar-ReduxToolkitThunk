@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getInfo } from '../redux/actions';
 import Loader from './Loader';
 import Error from './Error';
+import formatDate from '../utils/formatDate';
 
 const Modal = ({ detailId, close }) => {
   const { isLoading, error, info } = useSelector((store) => store.info);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getInfo(detailId));
-  }, []);
+  }, [detailId]);
 
   console.log(info);
 
@@ -37,28 +38,48 @@ const Modal = ({ detailId, close }) => {
           info && (
             <div className="h-[100%] flex flex-col justify-between pt-5 text-white">
               <div className="flex flex-col gap-3">
-                <h2 className='my-1'>{info.aircraft.model.text}</h2>
-                <h2 className='my-1'>{info.aircraft.model.code}</h2>
+                <h2 className="my-1">{info.aircraft.model.text}</h2>
+                <h2 className="my-1">{info.aircraft.model.code}</h2>
                 <p className="flex gap-3">
                   <span>Queue Code</span>
-                  <span className='bg-blue-400 px-2 py-1 rounded-md font-bold capitalize text-white text-sm '>{info.aircraft.registration}</span>
+                  <span className="bg-blue-400 px-2 py-1 rounded-md font-bold capitalize text-white text-sm ">
+                    {info.aircraft.registration}
+                  </span>
                 </p>
                 <img src={info.aircraft.images.large[0].src} alt="" />
                 <p className="flex gap-3">
                   <span>Airline</span>
-                  <span className=''>{info.airline?.short}</span>
+                  <span className="">{info.airline?.short}</span>
                 </p>
                 <p className="flex gap-3">
-                  <span>Departure</span>
-                  <a href={info.airport.origin.website} target='_blank'>{info.airport.origin.name}</a>
+                  <span>Departure Airport</span>
+                  <a href={info.airport.origin.website} target="_blank">
+                    {info.airport.origin.name}
+                  </a>
                 </p>
                 <p className="flex gap-3">
-                  <span>Destination</span>
-                  <a href={info?.airport?.destination?.website} target='_blank'>{info?.airport?.destination?.name}</a>
+                  <span>Arrival Airport</span>
+                  <a href={info?.airport?.destination?.website} target="_blank">
+                    {info?.airport?.destination?.name}
+                  </a>
+                </p>
+                <p className="flex gap-3">
+                  <span>Departure Time</span>
+                  <span className="">
+                    {formatDate(info.time.scheduled.departure)}
+                  </span>
+                </p>
+                <p className="flex gap-3">
+                  <span>Arrival Time</span>
+                  <span className="">
+                    {formatDate(info.time.scheduled.arrival)}
+                  </span>
                 </p>
               </div>
 
-              <p className="flex gap-3">Uyarı</p>
+              <p className={`flex gap-3 p-2 rounded-xl font-bold justify-center ${info.status.icon}`}>
+                <span>{info.status.text}</span>
+              </p>
             </div>
           )
         )}

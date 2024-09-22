@@ -154,6 +154,16 @@ header {
   transform: scale(0.85);
 }
 
+.green {
+  background-color: rgb(1, 167, 1);
+}
+.red {
+  background-color: rgb(253, 2, 2);
+}
+.yellow {
+  background-color: rgb(205, 170, 0);
+}
+
 /* LOADER*/
 /* From Uiverse.io by Valeron-T */
 .loader {
