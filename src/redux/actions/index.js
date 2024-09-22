@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
 import api from '../../api';
 
 export const getFlights = createAsyncThunk('flight/getFlights', async () => {
@@ -18,4 +17,10 @@ export const getFlights = createAsyncThunk('flight/getFlights', async () => {
     lng: item[3],
   }));
   return formatted;
+});
+
+export const getInfo= createAsyncThunk('info/getInfo', async (id) => {
+  const res = await api.get(`/flights/detail?flight=${id}`);
+
+  return res.data;
 });

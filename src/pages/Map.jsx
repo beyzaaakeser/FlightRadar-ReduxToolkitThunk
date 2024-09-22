@@ -6,7 +6,7 @@ import DetailButton from '../components/DetailButton';
 import { icon } from 'leaflet';
 const Map = ({setDetailId}) => {
   const { isLoading, error, flights } = useSelector((store) => store.flight);
-
+  const { route} = useSelector((store) => store.info);
   const planeIcon = icon({
     iconUrl: '/public/plane.png',
     iconSize: new L.Point(25, 25),

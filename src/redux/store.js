@@ -1,9 +1,11 @@
 import { configureStore, createAsyncThunk } from '@reduxjs/toolkit';
-import flightSlice from './slices/flightSlice';
+import flightReducer from './slices/flightSlice';
+import infoReducer from './slices/infoSlice';
 
 const store = configureStore({
   reducer: {
-    flight: flightSlice,
+    flight: flightReducer,
+    info: infoReducer
   },
 });
 
