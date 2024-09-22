@@ -1,9 +1,15 @@
-import React from 'react'
+import React from 'react';
 
-const Error = () => {
+const Error = ({ msg }) => {
   return (
-    <div>Error</div>
-  )
-}
+    <div className=" w-[100%] h-[100%] grid place-items-center text-center">
+      <div>
+        <h1>Ooppss..</h1>
+        <h1>Something went wrong</h1>
+        <p className=' mt-2 text-red-500'>{msg}</p>
+      </div>
+    </div>
+  );
+};
 
-export default Error
+export default Error;

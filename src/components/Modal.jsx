@@ -27,10 +27,10 @@ const Modal = ({ detailId, close }) => {
           </button>
         </div>
 
-        {true ? (
-          <Loader/>
+        {isLoading ? (
+          <Loader />
         ) : error ? (
-          <Error/>
+          <Error msg={error} />
         ) : (
           <>
             <div>
