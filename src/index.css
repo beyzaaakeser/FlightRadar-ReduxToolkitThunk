@@ -183,6 +183,15 @@ header {
   background: #555; /* Hover üzerinde scrollbar rengi */
 }
 
+.list-loader{
+  margin-top: 90px;
+  scale:0.7 ;
+}
+
+.list-error{
+  margin-top: 90px;
+}
+
 /* LOADER*/
 /* From Uiverse.io by Valeron-T */
 .loader {

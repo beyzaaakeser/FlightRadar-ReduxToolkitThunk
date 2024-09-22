@@ -52,7 +52,7 @@ const Modal = ({ detailId, close }) => {
                 </h2>
 
                 <p className="flex gap-3 mb-2">
-                  <span>Queue Code</span>
+                  <span>Tail Number</span>
                   <span className="bg-blue-400 px-2 py-1 rounded-md font-bold capitalize text-white text-sm ">
                     {info?.aircraft?.registration}
                   </span>
