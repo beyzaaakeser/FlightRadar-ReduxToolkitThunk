@@ -4,7 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import { useSelector } from 'react-redux';
 import DetailButton from '../components/DetailButton';
 import { icon } from 'leaflet';
-const Map = () => {
+const Map = ({setDetailId}) => {
   const { isLoading, error, flights } = useSelector((store) => store.flight);
 
   const planeIcon = icon({
@@ -31,7 +31,7 @@ const Map = () => {
           <Popup>
             <div className="popup">
               <span>Code: {flight.code}</span>
-              <DetailButton />
+              <DetailButton setDetailId={setDetailId} flight={flight}/>
             </div>
           </Popup>
         </Marker>

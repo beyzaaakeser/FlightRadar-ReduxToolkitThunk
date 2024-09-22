@@ -1,31 +1,34 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  color: #063d97;
-  background: #F2EFE9;
+  color: #AACCFF;
+  background: #242528;
   min-height: 100vh;
   font-family: 'Inter', system-ui;
   a {
     text-decoration: none;
-    color: #063d97;
+    color: #AACCFF;
   }
 }
 
 button {
-  background: #F2EFE9;
+  background: #f2efe9;
   padding: 7px 20px;
   border-radius: 10px;
   color: #063d97;
   font-weight: 600;
   border: none;
-  margin-bottom:  15px ;
+  margin-bottom: 15px;
   border: 1px solid #ea6f07;
 }
 
 header {
-  background-color: #F2EFE9;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -48,9 +51,13 @@ header {
   }
 
   h3 {
-    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
     font-weight: 400;
     margin: 0;
+    span {
+      color: #ea6f07;
+      font-weight: bold;
+    }
   }
 }
 
@@ -76,25 +83,22 @@ header {
 
 .leaflet-container {
   height: calc(100vh - 148px);
- 
 }
 
-.popup{
+.popup {
   display: flex;
   flex-direction: column;
   gap: 10px;
-
-
 }
 
-.popup span{
+.popup span {
   text-align: center;
   font-weight: 600;
   font-size: 15px;
 }
 
-/* From Uiverse.io by JaydipPrajapati1910 */ 
-.detail-div{
+/* From Uiverse.io by JaydipPrajapati1910 */
+.detail-div {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -134,7 +138,6 @@ header {
 .btn:hover .icon {
   justify-content: center;
   width: 100px;
-
 }
 
 .btn:hover .text {

@@ -1,9 +1,9 @@
 import React from 'react';
 
-const DetailButton = () => {
+const DetailButton = ({ setDetailId, flight }) => {
   return (
-    <div className='detail-div'>
-      <button className="btn">
+    <div className="detail-div">
+      <button onClick={() => setDetailId(flight.id)} className="btn">
         <span className="icon">
           <svg
             xmlns="http://www.w3.org/2000/svg"
