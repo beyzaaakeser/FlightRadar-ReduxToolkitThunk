@@ -10,10 +10,18 @@ import Modal from './components/Modal';
 
 const App = () => {
   const [detailId, setDetailId] = useState(null);
-  console.log(detailId);
+  
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getFlights());
+    const timer = setInterval(() => {
+      dispatch(getFlights());
+    }, 25000);
+
+    return () => {
+      clearInterval(timer);
+    };
   }, []);
 
   return (
