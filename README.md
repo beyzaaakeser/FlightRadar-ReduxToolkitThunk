@@ -19,7 +19,7 @@ The Flight Radar application I developed allows users to track instant flights o
 
 <h4>GIF</h5>
 
-![](/public/flightRadar-gif.gif)
+![](/public/flight-gif.gif)
 
 <h4>IMAGES</h4>
 
