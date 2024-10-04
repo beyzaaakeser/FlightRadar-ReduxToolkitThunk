@@ -155,20 +155,93 @@ header {
   transform: scale(0.85);
 }
 
-.green {
-  background-color: rgb(1, 167, 1);
+.modal-outer{
+  position: fixed;
+  z-index: 999999;
+  height: calc(100vh - 10px);
+  top: 10px;
+  left: 0;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.1); /* Hafif şeffaf arka plan */
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(10px); /* Arka planı bulanık yap */
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 15px;
+
+  .modal-inner{
+    display: flex;
+    flex-direction: column;
+    background-color: #1a1d23;
+    padding: 15px;
+    color: #ede9e9;
+    height: 100%;
+    width: 350px;
+    overflow-y: auto;
+    justify-content: space-between;
+    border-radius: 10px;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    h4{
+      margin: 0;
+      color: orange;
+      font-weight: 600;
+    }
+
+    .info{
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .info-wrapper{
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      p{
+        margin: 0;
+        padding: 0;
+        text-transform: capitalize;
+      }
+
+      .info-img{
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+      .alert{
+        padding: 5px;
+        border-radius: 10px;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        background-color: darkgray;
+        color: #212121;
+      }
+
+
+      .green{
+        background-color: yellowgreen;
+      }
+      .red{
+        background-color: #f43636;
+      }
+      .yellow{
+        background-color: #f3f331;
+      }
+
+    }
+  }
+
 }
-.red {
-  background-color: rgb(253, 2, 2);
-}
-.yellow {
-  background-color: rgb(205, 170, 0);
-}
+
 
 .modal-inner::-webkit-scrollbar {
   width: 10px; /* Scrollbar genişliği */
   border-radius: 10px;
-  
 }
 
 .modal-inner::-webkit-scrollbar-track {
@@ -176,7 +249,7 @@ header {
 }
 
 .modal-inner::-webkit-scrollbar-thumb {
-  background: #9CA3AF; /* Scrollbar rengi */
+  background: #9ca3af; /* Scrollbar rengi */
   border-radius: 10px;
 }
 
@@ -184,34 +257,86 @@ header {
   background: #555; /* Hover üzerinde scrollbar rengi */
 }
 
-.list-loader{
-  margin-top: 90px;
-  scale:0.7 ;
+
+
+.plane-icon{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: orange;
+  background-color: #efeded;
+  padding: 4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.list-error{
+
+
+.list-loader {
+  margin-top: 90px;
+  scale: 0.7;
+}
+
+.list-error {
   margin-top: 90px;
 }
 
-.pagination{
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer; /* Tooltip olduğu için fare işaretçisi değişsin */
+}
+
+.tooltip-container h2 {
+  margin: 0;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  background-color: transparent;
+  color: #cfcaca;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 5px;
+  text-wrap: nowrap;
+  padding: 3px 7px;
+  position: absolute;
+  top: -80%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.tooltip-container:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.pagination {
   display: flex;
   justify-content: center;
   margin: 40px 0;
-  li{
+  li {
     padding: 10px 15px;
     background: black;
     color: white;
   }
 
-  li:first-child{
+  li:first-child {
     border-radius: 10px 0 0 10px;
   }
-  li:last-child{
-    border-radius: 0 10px 10px 0 ;
+  li:last-child {
+    border-radius: 0 10px 10px 0;
   }
 
-  .selected{
-    background: #EA6F07;
+  .selected {
+    background: #ea6f07;
   }
 }
 

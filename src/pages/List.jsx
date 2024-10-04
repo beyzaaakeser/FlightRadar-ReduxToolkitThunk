@@ -40,8 +40,8 @@ const List = ({ setDetailId }) => {
   }
 
   return (
-    <div className="p-3 p-md-4">
-      <table className="table table-dark table-striped table-hover table-responsive mt-5">
+    <div className="p-3 p-md-4 ">
+      <table className="table table-dark table-striped table-hover table-responsive mt-3 w-[70%] mx-auto">
         <thead>
           <tr>
             <th>Id</th>

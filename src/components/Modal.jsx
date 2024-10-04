@@ -4,117 +4,163 @@ import { getInfo } from '../redux/actions';
 import Loader from './Loader';
 import Error from './Error';
 import formatDate from '../utils/formatDate';
+import Tooltips from './Tooltips';
+import { SlClose } from 'react-icons/sl';
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+import '@splidejs/react-splide/css';
+import { IoAirplaneOutline } from 'react-icons/io5';
+import { GiAirplaneArrival, GiAirplaneDeparture } from 'react-icons/gi';
 
-const Modal = ({ detailId, close }) => {
+const Modal = ({ id, close }) => {
   const { isLoading, error, info } = useSelector((store) => store.info);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getInfo(detailId));
-  }, [detailId]);
+    dispatch(getInfo(id));
+  }, [id]);
 
   console.log(info);
+  const images = info?.aircraft?.images?.large
+    ? info.aircraft.images.large
+    : info?.aircraft?.images?.medium
+    ? info.aircraft.images.medium
+    : info?.aircraft?.images?.thumbnails;
+
+  const airportName = (text) => {
+    if (!text) return 'Bilinmiyor';
+
+    const words = text.split(' ');
+
+    if (words[0].endsWith('.')) {
+      return words.slice(0, 2).join(' ');
+    } else {
+      return words[0];
+    }
+  };
 
   const isVIP = !info?.aircraft?.registration || !info?.airline?.name;
 
   return (
-    <div className="fixed z-[9999] h-lvh top-0 left-0 flex items-center modal-outer max-sm:w-[100%] max-sm:bg-red-500">
-      <div
-        className="bg-black w-[380px] h-[95%] rounded-2xl flex flex-col 
-      p-4 gap-3 shadow-2xl shadow-blue-500 ml-3 overflow-y-auto  modal-inner 
-      max-sm:w-[100%] max-sm:h-[100%] max-sm:ml-0 max-sm:rounded-none"
-      >
-        <div className="flex justify-end">
-          <button
-            onClick={close}
-            className="text-lg transition duration-500 cursor-pointer from-inherit font-bold border-none mb-0 px-3 py-1"
-          >
-            X
-          </button>
-        </div>
-
+    <div className="modal-outer">
+      <div className="modal-inner">
         {isLoading ? (
           <Loader />
         ) : error ? (
           <Error msg={error} />
         ) : isVIP ? (
-          <p className=" w-[100%] h-[100%] grid place-items-center text-xl">
-            The plane is a private plane. Flight information is hidden.
-          </p>
+          <h3 className="error-container">Ozel Ucus</h3>
         ) : (
           info && (
-            <div className="h-[100%] flex flex-col justify-between pt-1 text-white">
-              <div className="flex flex-col gap-2">
-                <h2 className="my-1 text-2xl font-bold">
-                  {info?.aircraft?.model?.text}
-                </h2>
-                <h2 className="my-1 text-lg font-semibold">
-                  {info?.aircraft?.model?.code}
-                </h2>
-
-                <p className="flex gap-3 mb-2">
-                  <span>Tail Number</span>
-                  <span className="bg-blue-400 px-2 py-1 rounded-md font-bold capitalize text-white text-sm ">
-                    {info?.aircraft?.registration}
-                  </span>
-                </p>
-                <img src={info?.aircraft?.images?.large[0]?.src} alt="" />
-                <div className="bg-gray-400 p-4 text-black">
-                  <p className="flex gap-3 py-2">
-                    <span className="max-sm:w-1/3 sm:w-1/2 font-semibold">
-                      Airline
-                    </span>
-                    <span className="max-sm:w-2/3 sm:w-1/2">
-                      {info?.airline?.name}
-                    </span>
-                  </p>
-                  <p className="flex gap-3 py-2">
-                    <span className="max-sm:w-1/3 sm:w-1/2  font-semibold">
-                      Departure Airport
-                    </span>
-                    <a
-                      href={info?.airport?.origin?.website}
-                      className="text-black max-sm:w-2/3 sm:w-1/2"
-                      target="_blank"
-                    >
-                      {info?.airport?.origin?.name}
-                    </a>
-                  </p>
-                  <p className="flex gap-3 py-2">
-                    <span className="max-sm:w-1/3 sm:w-1/2  font-semibold">
-                      Arrival Airport
-                    </span>
-                    <a
-                      className="text-black max-sm:w-2/3 sm:w-1/2"
-                      href={info?.airport?.destination?.website}
-                      target="_blank"
-                    >
-                      {info?.airport?.destination?.name}
-                    </a>
-                  </p>
-                  <p className="flex gap-3 py-2">
-                    <span className="max-sm:w-1/3 sm:w-1/2  font-semibold">
-                      Departure Time
-                    </span>
-                    <span className="max-sm:w-2/3 sm:w-1/2">
-                      {formatDate(info?.time?.scheduled?.departure)}
-                    </span>
-                  </p>
-                  <p className="flex gap-3 py-2">
-                    <span className="max-sm:w-1/3 sm:w-1/2 font-semibold">
-                      Arrival Time
-                    </span>
-                    <span className="max-sm:w-2/3 sm:w-1/2">
-                      {formatDate(info?.time?.scheduled?.arrival)}
-                    </span>
-                  </p>
+            <div className="info ">
+              <div className="modal-header mb-4 d-flex justify-content-between align-items-center">
+                <div className="d-flex gap-3 align-items-center justify-content-center">
+                  <Tooltips
+                    desings={'text-warning fs-5'}
+                    title={info.identification.callsign}
+                    tooltipText={'Call Sing'}
+                  />
+                  <Tooltips
+                    desings={'text-info fs-6'}
+                    title={info.identification.number.default}
+                    tooltipText={'Ucus Kodu'}
+                  />
+                  <Tooltips
+                    desings={'text-success fw-bold fs-6'}
+                    title={info.aircraft?.registration}
+                    tooltipText={'Kuyruk Kodu'}
+                  />
                 </div>
+
+                <SlClose onClick={close} size={'24px'} />
               </div>
 
-              <p
-                className={`flex gap-3 p-2 mt-4 rounded-xl font-bold justify-center bg-gray-400 ${info.status.icon}`}
-              >
-                <span>{info?.status?.text}</span>
-              </p>
+              <div className="info-wrapper">
+                <div className="d-flex  flex-column gap-2">
+                  <h4>{info?.airline?.name}</h4>
+
+                  <Splide
+                    className="overflow-hidden rounded"
+                    options={{ pagination: false }}
+                  >
+                    {images.map((image, index) => (
+                      <SplideSlide key={index}>
+                        <img
+                          className="info-img rounded"
+                          alt={info?.airline?.name}
+                          src={image.src}
+                        />
+                      </SplideSlide>
+                    ))}
+                  </Splide>
+
+                  <div className="d-flex align-items-center justify-content-between ">
+                    <h5>{info.aircraft?.model?.text}</h5>
+                    <h5>{info.aircraft?.model?.code}</h5>
+                  </div>
+
+                  <div className="d-flex position-relative border border-dark-subtle  justify-content-around  ">
+                    <div className="d-flex p-2 text-center w-100  border border-dark-subtle flex-column ">
+                      <span className={'text-warning fw-bold'}>
+                        {info.airport?.origin?.code.iata}
+                      </span>
+                      <a
+                        className="text-decoration-none text-white text-truncate "
+                        href={info.airport?.origin?.website}
+                        target="_blank"
+                      >
+                        <span className=" ">
+                          {airportName(info.airport?.origin?.name)}
+                        </span>
+                      </a>
+                    </div>
+
+                    <div className="d-flex p-2 flex-column w-100 border border-dark-subtle  text-center align-items-center  justify-content-center ">
+                      <span className={'text-warning fw-bold'}>
+                        {info.airport?.destination?.code.iata}
+                      </span>
+                      <a
+                        className="text-decoration-none text-white text-truncate "
+                        href={info.airport?.destination?.website}
+                        target="_blank"
+                      >
+                        <span className="">
+                          {airportName(info.airport?.destination?.name)}
+                        </span>
+                      </a>
+                    </div>
+
+                    <div className="plane-icon">
+                      <IoAirplaneOutline size={'32px'} />
+                    </div>
+                  </div>
+
+                  <div className="d-flex w-100 justify-content-between ">
+                    <div className="d-flex border justify-content-center align-items-center flex-column gap-1 w-100 ">
+                      <p className="w-100 text-center pt-2 flex items-center justify-center gap-2">
+                        <GiAirplaneDeparture color="dodgerblue" size="28px" />{' '}
+                        <span>Departure</span>
+                      </p>
+                      <p className="fs-6 pb-2">
+                        {' '}
+                        {formatDate(info.time.scheduled.departure)}
+                      </p>
+                    </div>
+
+                    <div className="d-flex border justify-content-center align-items-center flex-column gap-1 w-100">
+                      <p className="w-100 text-center pt-2 flex gap-2 items-center justify-center">
+                        <GiAirplaneArrival color="green" size="28px" />{' '}
+                        <span>Arrival</span>
+                      </p>
+                      <p className="fs-6 pb-2">
+                        {formatDate(info.time.scheduled.arrival)}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <p className={`alert ${info.status.icon}`}>
+                  <span>{info.status.text}</span>
+                </p>
+              </div>
             </div>
           )
         )}

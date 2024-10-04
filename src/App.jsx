@@ -24,6 +24,10 @@ const App = () => {
     };
   }, []);
 
+  const handleClick = () => { 
+    setDetailId(null);
+   }
+
   return (
     <BrowserRouter>
       <Header />
@@ -34,7 +38,7 @@ const App = () => {
       </Routes>
 
       {detailId && (
-        <Modal detailId={detailId} close={() => setDetailId(null)} />
+        <Modal id={detailId} close={handleClick} />
       )}
     </BrowserRouter>
   );

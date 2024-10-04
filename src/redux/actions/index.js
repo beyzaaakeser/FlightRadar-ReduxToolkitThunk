@@ -15,11 +15,12 @@ export const getFlights = createAsyncThunk('flight/getFlights', async () => {
     code: item[1],
     lat: item[2],
     lng: item[3],
+    deg: item[4],
   }));
   return formatted;
 });
 
-export const getInfo= createAsyncThunk('info/getInfo', async (id) => {
+export const getInfo = createAsyncThunk('info/getInfo', async (id) => {
   const res = await api.get(`/flights/detail?flight=${id}`);
 
   return res.data;
